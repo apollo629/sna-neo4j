@@ -3,7 +3,7 @@
 ## Recommendation Systems
 ### Cosine Similarity, K-NN Recommendation, Link Prediction Scoring Analysis
 
-__ 1. First Calculate Cosine Similarity & Create a relation as similarity __
+1. First Calculate Cosine Similarity & Create a relation as similarity
     * https://en.wikipedia.org/wiki/Cosine_similarity
     * ```//totalBalance 0 olmayanlardan e1 in takdir ettiklerini takdir edenler arasida similarity olusturan query
        MATCH (e1:Employee)-[:TAKDIR_ETTI]->(t1:Takdir)<-[:TAKDIR_ALDI]-(e2:Employee)-[:TAKDIR_ETTI]->(t2:Takdir)<-[:TAKDIR_ALDI]-(e3:Employee)
