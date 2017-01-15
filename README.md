@@ -3,9 +3,9 @@
 ## Recommendation Systems
 ### Cosine Similarity, K-NN Recommendation, Link Prediction Scoring Analysis
 
-1. First Calculate Cosine Similarity & Create a relation as similarity
+__ 1. First Calculate Cosine Similarity & Create a relation as similarity __
     * https://en.wikipedia.org/wiki/Cosine_similarity
-      ```//totalBalance 0 olmayanlardan e1 in takdir ettiklerini takdir edenler arasida similarity olusturan query
+    * ```//totalBalance 0 olmayanlardan e1 in takdir ettiklerini takdir edenler arasida similarity olusturan query
        MATCH (e1:Employee)-[:TAKDIR_ETTI]->(t1:Takdir)<-[:TAKDIR_ALDI]-(e2:Employee)-[:TAKDIR_ETTI]->(t2:Takdir)<-[:TAKDIR_ALDI]-(e3:Employee)
        where t1.totalBalance <> 0 and t2.totalBalance <> 0
        WITH SUM(t1.totalBalance * t2.totalBalance) as tdp,
@@ -16,15 +16,15 @@
 
 2. Get Similarity Score of 2 Employee
     * Use this endpoint to get similarity of 2 employee
-        http://localhost:8080/employee/cossin/40/1185
-        ``` //uid ye gore 2 kullanicinin cosine similartysini verir
+    * http://localhost:8080/employee/cossin/40/1185
+    * ``` //uid ye gore 2 kullanicinin cosine similartysini verir
         MATCH  (p1:Employee {uID:40})-[s:SIMILARITY]-(p2:Employee {uID:1185})
         RETURN s.similarity AS `Cosine Similarity` ```
 
 3. Get Most Similar 5 Employee
     * Use this endpoint to get most 5 similar
-        http://localhost:8080/employee/similar/40
-        ```//similarity hesabina gore 40 id li kullaniciya benzer kullanicilari getirir
+    * http://localhost:8080/employee/similar/40
+    * ```//similarity hesabina gore 40 id li kullaniciya benzer kullanicilari getirir
            MATCH (e1:Employee {uID:40})-[s:SIMILARITY]-(e2:Employee)
            WITH e2, s.similarity as sim
            order by sim desc limit 5 return e2.name as neighbor, sim as similarity ```
@@ -32,8 +32,8 @@
 
 4. Apply K-NN Recommendation By Using Similarity
     * Use this endpoint to see recommendations for employee
-        http://localhost:8080/employee/recommend/40
-        ``` //k-nn recommendation
+    * http://localhost:8080/employee/recommend/40
+    * ``` //k-nn recommendation
             //e1 uID 40 olana benzerlerin takdir ettiklerini e1'e recommend et ortalama balance ile
             MATCH (e2:Employee)-[:TAKDIR_ETTI]->(takdir)<-[:TAKDIR_ALDI]-(e3:Employee), (e2)-[s:SIMILARITY]-(e1:Employee {uID:40})
             WHERE NOT((e1)-[:TAKDIR_ETTI]->(e3))
@@ -54,8 +54,8 @@
 
 6. Get Employe Degree
     * Use this endpoint to get degree of all employees
-        http://localhost:8080/employee/degrees
-        ```//employee ve onun degreesi
+    * http://localhost:8080/employee/degrees
+    * ```//employee ve onun degreesi
            MATCH  (p1:Employee)-[s:SIMILARITY]-(p2:Employee)
            with p1, count(p2) as d
            order by p1.uID asc
@@ -63,8 +63,8 @@
 
 7. Calculate Jaccard Score of given 2 employee for Link Prediction
     * Use this endpoint to get jaccard score
-        http://localhost:8080/employee/jaccard/40/1171
-        ``` //link prediction 2 employee'nin jaccard index score u
+    * http://localhost:8080/employee/jaccard/40/1171
+    * ``` //link prediction 2 employee'nin jaccard index score u
         MATCH  (p1:Employee {uID:40})-[s:SIMILARITY]-(p2:Employee)
         with p2
         MATCH  (p3:Employee {uID:1171})-[s:SIMILARITY]-(p4:Employee)
@@ -80,8 +80,8 @@
 
 8. Calculate Common Neighbor Score of given all employees for Link Prediction
    * Use this endpoint to get jaccard score
-       http://localhost:8080/employee/cns
-       ``` //link prediction common neighbour score
+   * http://localhost:8080/employee/cns
+   * ``` //link prediction common neighbour score
            MATCH  (p1:Employee)-[s:SIMILARITY]-(p2:Employee)
            with p1, p2
            MATCH  (p3:Employee)-[s:SIMILARITY]-(p4:Employee)
