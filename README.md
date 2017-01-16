@@ -5,7 +5,7 @@
 
 1. First Calculate Cosine Similarity & Create a relation as similarity
     * https://en.wikipedia.org/wiki/Cosine_similarity
-    * ```//totalBalance 0 olmayanlardan e1 in takdir ettiklerini takdir edenler arasida similarity olusturan query
+    * ```//totalBalance 0 olmayanlardan e1 in takdir ettiklerinin takdir ettikleri ile e1 arasida similarity olusturan query
        MATCH (e1:Employee)-[:TAKDIR_ETTI]->(t1:Takdir)<-[:TAKDIR_ALDI]-(e2:Employee)-[:TAKDIR_ETTI]->(t2:Takdir)<-[:TAKDIR_ALDI]-(e3:Employee)
        where t1.totalBalance <> 0 and t2.totalBalance <> 0
        WITH SUM(t1.totalBalance * t2.totalBalance) as tdp,
