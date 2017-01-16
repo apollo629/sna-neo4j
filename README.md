@@ -1,6 +1,6 @@
 # Ms. Computer Engineering Social Network Analysis Term Project / sna-neo4j
 
-## Recommendation Systems
+## Social Information Filtering & Recommendation Systems
 ### Cosine Similarity, K-NN Recommendation, Link Prediction Scoring Analysis
 
 1. First Calculate Cosine Similarity & Create a relation as similarity
